@@ -1,27 +1,26 @@
 package fr.feavy.server.network;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.net.URLDecoder;
 import java.util.Collection;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 
-import fr.feavy.network.packets.ConnectionReplyPacket;
-import fr.feavy.network.packets.Packet;
-import fr.feavy.network.packets.PacketID;
-import fr.feavy.network.packets.PlayerJoinPacket;
-import fr.feavy.network.utils.ByteArray;
+import fr.feavy.network.PacketFactory;
+import fr.feavy.network.packet.*;
 import fr.feavy.server.Main;
+import fr.feavy.server.network.packet.handler.PacketHandlers;
+
+import javax.xml.crypto.Data;
 
 public class ClientConnection {
 
 	private Socket socket;
-	private OutputStream outputStream;
+	private DataOutputStream outputStream;
 	private Thread listener;
 
 	private boolean connectedToGame;
@@ -33,8 +32,8 @@ public class ClientConnection {
 	public ClientConnection(Socket s) throws IOException {
 		connectedToGame = false;
 		this.socket = s;
-		outputStream = s.getOutputStream();
-		listener = new Thread(new Listener(s.getInputStream()));
+		outputStream = new DataOutputStream(s.getOutputStream());
+		listener = new Thread(new Listener(new DataInputStream(s.getInputStream())));
 	}
 
 	public void start() {
@@ -85,54 +84,40 @@ public class ClientConnection {
 
 	public void sendPacket(Packet packet) {
 		//System.out.println(getIP() + "] Send packet " + packet.getID());
-		ByteArray data = packet.toByteArray();
 		// Chiffrement
-		new Thread(new Sender(outputStream, data)).start();
+		new Thread(new Sender(outputStream, packet)).start();
 	}
 
-	private void processData(ByteArray byteArray) {
-		String dataStr = byteArray.getBytesAsString();
-		String packetIdEncoded = dataStr.split("\\|")[0];
-		//System.out.println(getIP()+"] Packet received : " + packetIdEncoded);
-		dataStr = dataStr.replaceFirst(packetIdEncoded + "\\|", "");
-
-		String[] data = dataStr.split("\\|");
-
-		for (int i = 0; i < data.length; i++)
-			data[i] = URLDecoder.decode(data[i]);
-		
-
-		new Thread(new ClientDataProcessor(this, new Packet(PacketID.fromString(URLDecoder.decode(packetIdEncoded)), data))).start();
-		;
+	private void processData(int id, DataInputStream inputStream) throws IOException {
+		PacketID packetId = PacketID.values()[id];
+		if(packetId.isSecurePacket()) {
+			String senderUUID = inputStream.readUTF();
+			if(!senderUUID.equals(getUUID())){
+				System.err.println(getIP()+"] Warning : fake packet received !");
+				System.err.println("  expected UUID : "+getUUID());
+				System.err.println("  received UUID : "+senderUUID);
+				return;
+			}
+		}
+		Packet packet = PacketFactory.createPacket(packetId, inputStream);
+		PacketHandlers.get().handle(this, packet);
 	}
 
 	class Listener implements Runnable {
 
-		private InputStream inputStream;
+		private DataInputStream inputStream;
 
-		public Listener(InputStream inputStream) {
+		public Listener(DataInputStream inputStream) {
 			this.inputStream = inputStream;
 		}
 
 		@Override
 		public void run() {
 			while (true) {
-				ByteArray data = new ByteArray();
-				byte[] bytes = new byte[1024];
-				int length;
+				int packetId;
 				try {
-					boolean eof = false;
-					while ((length = inputStream.read(bytes)) != -1) {
-						// Déchiffrement
-						if (bytes[length - 1] == (byte) 0x00) {
-							eof = true;
-							length--;
-						}
-						data.append(bytes, 0, length);
-						if (eof)
-							break;
-					}
-					processData(data);
+					packetId = inputStream.readInt();
+					processData(packetId, inputStream);
 				} catch (IOException e) {
 					//e.printStackTrace();
 					disconnect();
@@ -145,22 +130,18 @@ public class ClientConnection {
 	}
 
 	class Sender implements Runnable {
+		private DataOutputStream outputStream;
+		private Packet packet;
 
-		private OutputStream outputStream;
-		private ByteArray data;
-
-		public Sender(OutputStream outputStream, ByteArray data) {
+		public Sender(DataOutputStream outputStream, Packet packet) {
 			this.outputStream = outputStream;
-			this.data = data;
+			this.packet = packet;
 		}
 
 		@Override
 		public void run() {
-			int length = data.getLength();
-			byte[] bytes = data.getBytes();
-
 			try {
-				outputStream.write(bytes, 0, length);
+				packet.writeTo(outputStream);
 				outputStream.flush();
 			} catch (IOException e) {
 				e.printStackTrace();

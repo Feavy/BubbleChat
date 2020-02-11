@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import fr.feavy.network.packets.ConnectionPacket;
-import fr.feavy.network.packets.Packet;
-import fr.feavy.network.packets.PacketID;
-import fr.feavy.network.packets.PlayerQuitPacket;
+import fr.feavy.server.network.packet.handler.PacketHandlers;
+import fr.feavy.network.packet.Packet;
+import fr.feavy.network.packet.PlayerQuitPacket;
 import fr.feavy.server.network.ClientConnection;
 import fr.feavy.server.network.Player;
+import fr.feavy.server.network.packet.handler.ServerPacketHandlers;
 
 public class Main {
 
@@ -28,6 +28,7 @@ public class Main {
 	private static boolean hasAdminKeyBeenValidated = false;
 
 	public static void main(String[] args) {
+		PacketHandlers.setInstance(new ServerPacketHandlers());
 
 		System.out.println("Server is listening...");
 

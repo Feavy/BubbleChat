@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a02bf73d-38b2-4715-ab98-f89e1804c7e3" name="Default Changelist" comment="" />
+    <list default="true" id="a02bf73d-38b2-4715-ab98-f89e1804c7e3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packet/ChatMessagePacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packet/Packet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packet/PacketID.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packet/PlayerJoinPacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packet/PlayerMovePacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packet/PlayerQuitPacket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/feavy/server/network/packet/handler/PacketHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/feavy/server/network/packet/handler/PacketHandlers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/feavy/server/network/packet/handler/ServerPacketHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/PacketFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/PacketFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packets/ChatMessagePacket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packets/ConnectionPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packet/ConnectionPacket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packets/ConnectionReplyPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packet/ConnectionReplyPacket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packets/Packet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packets/PacketID.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packets/PlayerJoinPacket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packets/PlayerMovePacket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packets/PlayerQuitPacket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/packets/SecurePacket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/utils/ByteArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/utils/ConversionUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/feavy/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/feavy/server/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/feavy/server/network/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/feavy/server/network/ClientConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/feavy/server/network/ClientDataProcessor.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,11 +38,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1XX2j9XHXlvgGmF6ZiPZuz2QHIr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,9 +55,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BubbleChat_Client/BubbleChat_Client.iml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -73,6 +107,7 @@
       <updated>1581178250818</updated>
       <workItem from="1581178252899" duration="1091000" />
       <workItem from="1581272055741" duration="1566000" />
+      <workItem from="1581442676009" duration="7270000" />
     </task>
     <servers />
   </component>
@@ -80,10 +115,18 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="730" y="222" key="#com.intellij.ide.util.MemberChooser" timestamp="1581452579653">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="730" y="222" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1581452579653" />
     <state x="808" y="410" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1581178258641">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="808" y="410" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581178258641" />
+    <state x="689" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1581444159591">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="689" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581444159591" />
     <state x="740" y="214" key="FileChooserDialogImpl" timestamp="1581178395951">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -108,5 +151,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1581178311185" />
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1581442691758">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581442691758" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1581452131254">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581452131254" />
   </component>
 </project>
