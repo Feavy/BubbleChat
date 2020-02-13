@@ -10,8 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import fr.feavy.client.MainWindow;
-import fr.feavy.client.network.PacketManager;
+import fr.feavy.client.network.ClientConnection;
 
 public class GameInterface extends JPanel{
 
@@ -28,7 +27,6 @@ public class GameInterface extends JPanel{
 		setLayout(null);
 		setBackground(Color.BLACK);
 		this.screen = new GameScreen(playerUsername);
-		PacketManager.addPacketListener(screen);
 		this.messageField = new JTextField();
 		this.messageField.addKeyListener(new KeyListener() {
 			

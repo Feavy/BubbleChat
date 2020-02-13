@@ -11,13 +11,17 @@ import java.util.TimerTask;
 import java.util.UUID;
 
 import fr.feavy.network.PacketFactory;
+import fr.feavy.network.io.ConnectionErrorListener;
+import fr.feavy.network.io.PacketDataListener;
+import fr.feavy.network.io.PacketReceiverRunnable;
+import fr.feavy.network.io.PacketSenderRunnable;
 import fr.feavy.network.packet.*;
 import fr.feavy.server.Main;
 import fr.feavy.server.network.packet.handler.PacketHandlers;
 
 import javax.xml.crypto.Data;
 
-public class ClientConnection {
+public class ClientConnection implements ConnectionErrorListener, PacketDataListener {
 
 	private Socket socket;
 	private DataOutputStream outputStream;
@@ -33,7 +37,7 @@ public class ClientConnection {
 		connectedToGame = false;
 		this.socket = s;
 		outputStream = new DataOutputStream(s.getOutputStream());
-		listener = new Thread(new Listener(new DataInputStream(s.getInputStream())));
+		listener = new Thread(new PacketReceiverRunnable(s.getInputStream(), this, this));
 	}
 
 	public void start() {
@@ -85,10 +89,11 @@ public class ClientConnection {
 	public void sendPacket(Packet packet) {
 		//System.out.println(getIP() + "] Send packet " + packet.getID());
 		// Chiffrement
-		new Thread(new Sender(outputStream, packet)).start();
+		new Thread(new PacketSenderRunnable(outputStream, packet, this)).start();
 	}
 
-	private void processData(int id, DataInputStream inputStream) throws IOException {
+	@Override
+	public void processData(int id, DataInputStream inputStream) throws IOException {
 		PacketID packetId = PacketID.values()[id];
 		if(packetId.isSecurePacket()) {
 			String senderUUID = inputStream.readUTF();
@@ -103,52 +108,9 @@ public class ClientConnection {
 		PacketHandlers.get().handle(this, packet);
 	}
 
-	class Listener implements Runnable {
-
-		private DataInputStream inputStream;
-
-		public Listener(DataInputStream inputStream) {
-			this.inputStream = inputStream;
-		}
-
-		@Override
-		public void run() {
-			while (true) {
-				int packetId;
-				try {
-					packetId = inputStream.readInt();
-					processData(packetId, inputStream);
-				} catch (IOException e) {
-					//e.printStackTrace();
-					disconnect();
-					return;
-				}
-
-			}
-		}
-
-	}
-
-	class Sender implements Runnable {
-		private DataOutputStream outputStream;
-		private Packet packet;
-
-		public Sender(DataOutputStream outputStream, Packet packet) {
-			this.outputStream = outputStream;
-			this.packet = packet;
-		}
-
-		@Override
-		public void run() {
-			try {
-				packet.writeTo(outputStream);
-				outputStream.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-				disconnect();
-			}
-		}
-
+	@Override
+	public void onError(Exception e) {
+		disconnect();
 	}
 
 }

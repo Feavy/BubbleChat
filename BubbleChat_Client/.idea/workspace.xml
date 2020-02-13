@@ -1,13 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fba7fa6a-7ac5-4229-a308-2093e67327fe" name="Default Changelist" comment="" />
+    <list default="true" id="fba7fa6a-7ac5-4229-a308-2093e67327fe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/feavy/client/network/ClientConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/feavy/client/network/packet/ClientPacketHandlers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/feavy/client/network/packet/ClientPacketSenderRunnable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/feavy/client/network/packet/PacketHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/feavy/client/network/packet/PacketHandlers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fr/feavy/client/network/packet/listener/PlayerListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/io/ConnectionErrorListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/io/PacketDataListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/io/PacketReceiverRunnable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BubbleChat_Network/src/fr/feavy/network/io/PacketSenderRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/feavy/client/ConnectionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/feavy/client/ConnectionPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/feavy/client/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/feavy/client/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/feavy/client/game/GameInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/feavy/client/game/GameInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/feavy/client/game/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/feavy/client/game/GameScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/feavy/client/network/PacketListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/feavy/client/network/PacketManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../BubbleChat_Server/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BubbleChat_Server/src/fr/feavy/server/network/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../BubbleChat_Server/src/fr/feavy/server/network/ClientConnection.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1XX2WHsFQ65CmaEXwN28pZfdUFT" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -15,12 +48,21 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BubbleChat_Network/BubbleChat_Network.iml" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/fr/feavy/client/network/packet/handler" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="fr.feavy.client.network.packet" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\quent\Documents\Projets_Java\BubbleChat\BubbleChat_Client\src\fr\feavy\client\network\packet\handler" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="MainWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -66,6 +108,9 @@
       <updated>1581178148288</updated>
       <workItem from="1581178151406" duration="23000" />
       <workItem from="1581178406868" duration="697000" />
+      <workItem from="1581452812461" duration="82000" />
+      <workItem from="1581612580519" duration="37000" />
+      <workItem from="1581616497194" duration="4035000" />
     </task>
     <servers />
   </component>
@@ -73,37 +118,65 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1581617337281">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1581617337281" />
     <state x="808" y="410" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1581178162655">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="808" y="410" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581178162655" />
-    <state x="740" y="214" key="FileChooserDialogImpl" timestamp="1581178418893">
+    <state x="740" y="214" key="FileChooserDialogImpl" timestamp="1581616576090">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="214" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1581178418893" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1581179345128">
+    <state x="740" y="214" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1581616576090" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1581623240418">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581179345128" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1581179345128">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581623240418" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1581623240418">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581179345128" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1581179345128">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581623240418" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1581623240418">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581179345128" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1581179345128">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581623240418" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1581623240418">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581179345128" />
-    <state x="440" y="95" key="SettingsEditor" timestamp="1581178420530">
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581623240418" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1581620830029">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1581178420530" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581620830029" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1581620830029">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581620830029" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1581620830029">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581620830029" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1581620830029">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581620830029" />
+    <state x="440" y="95" key="SettingsEditor" timestamp="1581612615501">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1581612615501" />
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1581616498301">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581616498301" />
     <state x="343" y="141" key="new project wizard" timestamp="1581178414830">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="343" y="141" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1581178414830" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1581620363104">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581620363104" />
   </component>
 </project>

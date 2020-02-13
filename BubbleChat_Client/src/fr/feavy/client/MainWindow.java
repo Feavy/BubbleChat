@@ -12,8 +12,9 @@ import javax.swing.border.EmptyBorder;
 
 import fr.feavy.client.game.Game;
 import fr.feavy.client.game.GameInterface;
-import fr.feavy.client.network.PacketManager;
-import fr.feavy.network.packets.SecurePacket;
+import fr.feavy.client.network.ClientConnection;
+import fr.feavy.client.network.packet.ClientPacketHandlers;
+import fr.feavy.client.network.packet.PacketHandlers;
 
 public class MainWindow extends JFrame {
 
@@ -24,6 +25,7 @@ public class MainWindow extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		PacketHandlers.setInstance(new ClientPacketHandlers());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -50,8 +52,8 @@ public class MainWindow extends JFrame {
 		}
 		
 		String ip = JOptionPane.showInputDialog("IP :");
-		
-		if(!Game.isDebug && !PacketManager.startConnection(ip, 12345))
+
+		if(!Game.isDebug && !ClientConnection.create(ip, 12345))
 				JOptionPane.showMessageDialog(this, "Erreur : le serveur est actuellement indisponible.", "Erreur", JOptionPane.ERROR_MESSAGE);
 		
 		setResizable(true);
@@ -83,7 +85,8 @@ public class MainWindow extends JFrame {
 		System.out.println("  Username : "+username);
 		System.out.println("  UUID     : "+uniqueID);
 		instance.setTitle("Bubble Chat - "+username);
-		SecurePacket.setUUID(uniqueID);
+		ClientConnection.get().setUUID(uniqueID);
+		//SecurePacket.setUUID(uniqueID);
 		instance.setupGameInterface(username);
 	}
 	

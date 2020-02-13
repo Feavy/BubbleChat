@@ -13,14 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import fr.feavy.client.network.PacketListener;
-import fr.feavy.client.network.PacketManager;
-import fr.feavy.network.packets.ConnectionPacket;
-import fr.feavy.network.packets.ConnectionReplyPacket;
-import fr.feavy.network.packets.Packet;
-import fr.feavy.network.packets.PacketID;
+import fr.feavy.client.network.ClientConnection;
+import fr.feavy.client.network.packet.PacketHandlers;
+import fr.feavy.network.packet.ConnectionPacket;
+import fr.feavy.network.packet.ConnectionReplyPacket;
 
-public class ConnectionPanel extends JPanel implements PacketListener{
+public class ConnectionPanel extends JPanel{
 
 	private boolean isInitialized;
 	
@@ -43,7 +41,7 @@ public class ConnectionPanel extends JPanel implements PacketListener{
 	private String adminKey;
 	
 	public ConnectionPanel(MainWindow parent){
-		PacketManager.addPacketListener(this);
+		PacketHandlers.get().setHandler(ConnectionReplyPacket.class, this::onConnectionReply);
 		this.parent = parent;
 		isInitialized = false;
 		
@@ -68,9 +66,9 @@ public class ConnectionPanel extends JPanel implements PacketListener{
 					loginButton.setEnabled(false);
 					infoLabel.setText("Connexion en cours...");
 					if(!adminKey.equals("0000-0000-0000-0000"))
-						PacketManager.sendPacket(new ConnectionPacket(username, adminKey));
+						ClientConnection.get().sendPacket(new ConnectionPacket(username, adminKey));
 					else
-						PacketManager.sendPacket(new ConnectionPacket(username));
+						ClientConnection.get().sendPacket(new ConnectionPacket(username));
 				}else{
 					infoLabel.setText("Erreur : Données entrées invalides.");
 				}
@@ -99,8 +97,8 @@ public class ConnectionPanel extends JPanel implements PacketListener{
 			}
 		});
 		
-		infoLabel = new JLabel(PacketManager.isConnected() ? "..." : "Erreur : le serveur est actuellement indisponible.", SwingConstants.CENTER);
-		loginButton.setEnabled(PacketManager.isConnected());
+		infoLabel = new JLabel(ClientConnection.get().isConnected() ? "..." : "Erreur : le serveur est actuellement indisponible.", SwingConstants.CENTER);
+		loginButton.setEnabled(ClientConnection.get().isConnected());
 		
 		add(title);
 		add(connexionTitle);
@@ -129,17 +127,13 @@ public class ConnectionPanel extends JPanel implements PacketListener{
 		infoLabel.setBounds((width-300)/2, (height-20)/2+90, 300, 20);
 	}
 
-	@Override
-	public void onPacket(Packet packet) {
-		if(packet.getID().equals(PacketID.CONNECTION_REPLY)) {
-			ConnectionReplyPacket p = new ConnectionReplyPacket(packet);
-			if(p.isSuccess()){
-				infoLabel.setText("Connecté avec succès.");
-				MainWindow.connected(username, p.getUUID());
-			}else{
-				loginButton.setEnabled(true);
-				infoLabel.setText("La connexion a echouée : ce pseudonyme est déjà utilisé.");
-			}
+	public void onConnectionReply(ConnectionReplyPacket p) {
+		if(p.isSuccess()){
+			infoLabel.setText("Connecté avec succès.");
+			MainWindow.connected(username, p.getUUID());
+		}else{
+			loginButton.setEnabled(true);
+			infoLabel.setText("La connexion a echouée : ce pseudonyme est déjà utilisé.");
 		}
 	}
 	

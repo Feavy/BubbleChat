@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -14,16 +15,12 @@ import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import fr.feavy.client.network.PacketListener;
-import fr.feavy.client.network.PacketManager;
-import fr.feavy.network.packets.ChatMessagePacket;
-import fr.feavy.network.packets.Packet;
-import fr.feavy.network.packets.PlayerJoinPacket;
-import fr.feavy.network.packets.PlayerMovePacket;
-import fr.feavy.network.packets.PlayerQuitPacket;
-import fr.feavy.network.utils.ConversionUtils;
+import fr.feavy.client.network.ClientConnection;
+import fr.feavy.network.packet.ChatMessagePacket;
+import fr.feavy.network.packet.PlayerMovePacket;
 
-public class GameScreen extends JPanel implements PacketListener {
+public class GameScreen extends JPanel {
+	private static GameScreen currentInstance;
 
 	private float lastWidth = 984;
 
@@ -35,18 +32,16 @@ public class GameScreen extends JPanel implements PacketListener {
 	private String playerUsername;
 
 	public GameScreen(String playerUsername) {
+		currentInstance = this;
 		this.playerUsername = playerUsername;
-		this.players = new HashMap<String, Player>();
+		this.players = new HashMap<>();
 		if (Game.isDebug) {
 			players.put(playerUsername, new Player(playerUsername, 500, 500, 1));
 		}
-		this.textBubbles = new ArrayList<TextBubble>();
+		this.textBubbles = new ArrayList<>();
 		setBackground(Color.WHITE);
 		setBorder(new LineBorder(new Color(136, 136, 136)));
-		this.refreshThread = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
+		this.refreshThread = new Thread(() -> {
 				while (true) {
 					repaint();
 					try {
@@ -55,45 +50,39 @@ public class GameScreen extends JPanel implements PacketListener {
 						e.printStackTrace();
 					}
 				}
-
-			}
 		});
-		addMouseListener(new MouseListener() {
+		addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (Game.isDebug)
 					players.get(playerUsername).moveTo(e.getX(), e.getY());
 				else
-					PacketManager.sendPacket(new PlayerMovePacket(null, (float) (e.getX() / getSize().getWidth()),
+					ClientConnection.get().sendPacket(new PlayerMovePacket("", (float) (e.getX() / getSize().getWidth()),
 							(float) (e.getY() / getSize().getHeight())));
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 		refreshThread.start();
+	}
+
+	public void addPlayer(Player player) {
+		players.put(player.getUsername(), player);
+	}
+
+	public void removePlayer(String username) {
+		players.remove(username);
+	}
+
+	public Player getPlayer(String username) {
+		return players.get(username);
+	}
+
+	public static GameScreen get() {
+		return currentInstance;
+	}
+
+	public float getLastWidth() {
+		return lastWidth;
 	}
 
 	@Override
@@ -117,7 +106,7 @@ public class GameScreen extends JPanel implements PacketListener {
 		drawTextBubbles(g2d);
 	}
 
-	private boolean isPlayerOnScreen(String username) {
+	public boolean isPlayerOnScreen(String username) {
 		return players.containsKey(username);
 	}
 
@@ -133,48 +122,9 @@ public class GameScreen extends JPanel implements PacketListener {
 
 	public void sendMessage(String message){
 		System.out.println("Message : "+message);
-		PacketManager.sendPacket(new ChatMessagePacket(null, message));
+		ClientConnection.get().sendPacket(new ChatMessagePacket("", message));
 		if(Game.isDebug)
 			players.get(playerUsername).setMessage(message);
-	}
-	
-	@Override
-	public void onPacket(Packet packet) {
-
-		String username;
-
-		switch (packet.getID()) {
-		case PLAYER_JOIN:
-			PlayerJoinPacket pj = new PlayerJoinPacket(packet);
-			username = pj.getUsername();
-			float x = pj.getX();
-			float y = pj.getY();
-			players.put(username, new Player(username, (float) (x * getSize().getWidth()),
-					(float) (y * getSize().getHeight()), (float) (getSize().getWidth() / lastWidth)));
-			break;
-		case PLAYER_QUIT:
-			PlayerQuitPacket pqp = new PlayerQuitPacket(packet);
-			username = pqp.getUsername();
-			if (isPlayerOnScreen(username))
-				players.remove(username);
-			break;
-		case PLAYER_MOVE:
-			PlayerMovePacket pm = new PlayerMovePacket(packet);
-			username = pm.getUsername();
-			if (isPlayerOnScreen(username)) {
-				float destX = (float) (pm.getXDestination() * getSize().getWidth());
-				float destY = (float) (pm.getYDestination() * getSize().getHeight());
-				players.get(pm.getUsername()).moveTo(destX, destY);
-			}
-			break;
-		case CHAT_MESSAGE:
-			ChatMessagePacket cmp = new ChatMessagePacket(packet);
-			username = cmp.getSenderUsername();
-			players.get(username).setMessage(cmp.getMessage());
-			break;
-		default:
-		}
-
 	}
 
 }
